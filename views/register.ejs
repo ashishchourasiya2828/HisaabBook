@@ -1,0 +1,28 @@
+<%- include('./partials/header.ejs') %>
+    <div class="logincontainer w-full h-[80%] flex items-center justify-center">
+        <div class="loginpanel">
+            <h3 class="text-2xl mb-3">Create account</h3>
+            <form action="/register" class="registerForm flex flex-col gap-2 items-start" method="post">
+                <input class="block px-3 py-2 border-[1px] border-zinc-100 rounded-md " autocomplete="off" type="email" placeholder="Email"
+                    name="email">
+                <input class="block px-3 py-2 border-[1px] border-zinc-100 rounded-md " autocomplete="off" type="text"
+                    placeholder="Username" id="username" name="username">
+                <input class="block px-3 py-2 border-[1px] border-zinc-100 rounded-md " autocomplete="off" type="text"
+                    placeholder="Full Name" name="name">
+                <input class="block px-3 py-2 border-[1px] border-zinc-100 rounded-md " autocomplete="off" type="password"
+                    placeholder="password" name="password">
+                <input class="block px-4 py-2 bg-blue-500 rounded-md  text-white" autocomplete="off" type="submit" value="Create">
+            </form>
+            <a class="mt-5 inline-block text-blue-500" href="/">Have an account, login here.</a>
+        </div>
+    </div>
+    <!-- <script>
+          document.getElementById('registerForm').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value.trim();
+
+            if (username.length < 3) {
+                event.preventDefault(); // Prevent form submission
+            } 
+        });
+    </script> -->
+    <%- include('./partials/footer.ejs') %>

@@ -1,0 +1,82 @@
+<%- include('./partials/header.ejs') %>
+    <div class="deletediv h-[9vw] border-[2px] border-zinc-300 w-[27vw]  rounded-lg absolute top-[1%] hidden left-[35%]">
+        <h2 class="text-[1.5vw] font-bold m-4">Are you sure you want to Delete ?</h2>
+        <div class="delete h-[50%] w-[100%]   flex items-center justify-center p-10 gap-[5vw] mt-[-3%] ">
+            <a href="/hisaab/delete/ <%= hisaab._id %>" id="deletebutton" class="bg-red-500 rounded-[3px] text-white font-semibold p-2">yes,delete it </a>
+            <a href="/hisaab/view" id="cancelbutton" class="bg-blue-500 rounded-[3px] text-white font-semibold p-2">cancel.</a>
+        </div>
+    </div>
+    <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg mt-10">
+        <div
+            class="absolute copieddiv hidden top-10 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-2 bg-blue-500 rounded-md">
+            <h3 class="text-blue-200 text-xl">
+                link copied
+            </h3>
+        </div>
+        
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">Khaatabook</h1>
+            <div class="flex space-x-4">
+                 <% if(hisaab.encrypted) { %>
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded">Encrypted</button>
+                    <% } else { %>
+                        <button class="bg-teal-600 text-white px-4 py-2 rounded">Available</button>
+               <% } %>
+                <button class="sharebtn text-gray-700 px-4 py-2 rounded flex items-center space-x-2">
+                    <a  id="copyUrl" data-hisaab-id="<%=hisaab._id %>"  href="/hisaab/share/<%= hisaab._id %>">share as a link</a>
+                   
+                </button>
+                <h2  id="delete" class="bg-red-500 text-white px-4 py-2 rounded">Delete</h2>
+                <a href="/hisaab/edit/<%= hisaab._id %>" class="bg-yellow-400 text-white px-4 py-2 rounded">Edit</a>
+            </div>
+        </div>
+
+        <div class="text-gray-500 mb-4">Created on  <%= hisaab.createdAt.getDate() %>-<%=hisaab.createdAt.getMonth()+1%>-<%=hisaab.createdAt.getFullYear() %>
+        </div>
+
+            <h2 class="text-xl font-semibold mb-2"> <%= hisaab.title %> </h2>
+            <p class="text-gray-700"><%=  hisaab.description %></p>
+        </div>
+
+
+    <script>
+       
+
+        document.querySelector("#delete").addEventListener("click",function(){
+            document.querySelector(".deletediv").classList.remove("hidden");
+        })
+        document.querySelector("#deletebutton").addEventListener("click",function(){
+            document.querySelector(".deletediv").classList.add("hidden");
+        })
+        document.querySelector("#cancelbutton").addEventListener("click",function(){
+            document.querySelector(".deletediv").classList.add("hidden");
+        })
+        
+        
+        
+        var timer;
+        const sharebtn = document.querySelector(".sharebtn");
+        sharebtn.addEventListener("click", function (e) {
+            clearTimeout(timer);
+
+            document.querySelector(".copieddiv")
+                .classList.remove("hidden");
+
+            timer = setTimeout(function () {
+                document.querySelector(".copieddiv")
+              
+                    .classList.add("hidden");
+            }, 3000)
+
+            let id = document.querySelector("#copyUrl").getAttribute("data-hisaab-id")
+         navigator.clipboard.writeText(`http://localhost:3000/hisaab/share/view/${id}`);
+        });
+        
+
+         
+            
+            
+
+    </script>
+
+    <%- include('./partials/footer.ejs') %>
