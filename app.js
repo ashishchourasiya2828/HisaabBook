@@ -12,12 +12,19 @@ const path = require("path");
 
 const flash = require("connect-flash");
 const expressSession = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 const { clearHisaabPassword } = require("./middlewares");
+
+const store = new MongoDBStore({
+    uri:process.env.MONGODB_URI,
+    collection:'sessions'
+})
 
 app.use(expressSession({
     secret: process.env.JWT_KEY, // Replace with a secure key
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store:store
 }));
 
 app.use(flash());
