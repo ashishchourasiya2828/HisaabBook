@@ -1,6 +1,5 @@
 const express = require("express");
 const { env } = require("process");
-const session = require("session");
 const app = express();
 const cookieparser = require("cookie-parser");
 
@@ -13,7 +12,7 @@ const path = require("path");
 
 const flash = require("connect-flash");
 const expressSession = require("express-session");
-const MongoDBStore = require("connect-mongodb-session")(session);
+const MongoDBStore = require("connect-mongodb-session")(expressSession);
 const { clearHisaabPassword } = require("./middlewares");
 
 const store = new MongoDBStore({
