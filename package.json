@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.3",
     "node-cron": "^3.0.3",
+    "session": "^0.1.0",
     "uuid": "^10.0.0"
   }
 }
